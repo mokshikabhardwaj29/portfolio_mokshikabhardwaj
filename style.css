@@ -1,0 +1,85 @@
+/* ══════════════════════════════════════════
+   MOKSHIKA BHARDWAJ — CREAM SCRAPBOOK THEME
+   ══════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Special+Elite&family=Permanent+Marker&family=VT323&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --cream:  #f0e8d8;
+  --cream2: #ece3d0;
+  --ink:    #2a1f18;
+  --pink:   #e8789e;
+  --pink2:  #c45b8a;
+  --muted:  rgba(42,31,24,0.45);
+  --tape:   rgba(240,232,216,0.75);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--cream);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.055'/%3E%3C/svg%3E");
+  color: var(--ink);
+  font-family: 'Special Elite', serif;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* grain overlay */
+body::after {
+  content:''; position:fixed; inset:0; z-index:900; pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.5; mix-blend-mode:multiply;
+}
+
+/* ── CURSOR ── */
+.cur-dot { width:9px; height:9px; background:var(--pink2); border-radius:50%; position:fixed; z-index:9999; pointer-events:none; transform:translate(-50%,-50%); }
+.cur-ring { width:26px; height:26px; border:1.5px solid rgba(196,91,138,0.4); border-radius:50%; position:fixed; z-index:9998; pointer-events:none; transform:translate(-50%,-50%); transition:all 0.5s ease; }
+
+/* ── TOP NAV ── */
+.topnav { position:fixed; top:0; left:0; right:0; z-index:800; padding:20px 36px; display:flex; justify-content:space-between; align-items:center; }
+.back-btn { font-family:'Kalam',cursive; font-size:16px; color:var(--muted); text-decoration:none; transition:color .2s; cursor:none; display:flex; align-items:center; gap:8px; }
+.back-btn:hover { color:var(--pink2); }
+.nav-page-label { font-family:'Kalam',cursive; font-size:13px; color:var(--muted); letter-spacing:0.1em; }
+
+/* ── WASHI TAPE ── */
+.washi { display:inline-block; background:rgba(232,120,158,0.3); padding:4px 28px; font-family:'Caveat',cursive; font-size:13px; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,.1); }
+
+/* ── SECTION LABEL ── */
+.sec-tag { display:inline-block; background:var(--pink); color:#fff; font-family:'Kalam',cursive; font-size:12px; letter-spacing:.2em; text-transform:uppercase; padding:3px 14px; margin-bottom:14px; transform:rotate(-1deg); }
+.sec-title { font-family:'Pacifico',cursive; font-size:clamp(36px,5vw,68px); color:var(--ink); line-height:1; margin-bottom:40px; }
+.sec-title em { color:var(--pink); font-style:normal; }
+
+/* ── CARD ── */
+.card { background:#fff; padding:32px 28px; box-shadow:3px 4px 16px rgba(42,31,24,.08); border:1px solid rgba(42,31,24,.06); transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+.card:hover { transform:translateY(-6px) rotate(-1deg); box-shadow:6px 10px 24px rgba(42,31,24,.13); }
+.card-tape { position:absolute; top:-8px; left:50%; transform:translateX(-50%); width:44px; height:10px; background:rgba(232,120,158,.4); border-radius:1px; }
+
+/* ── NEXT BAR ── */
+.next-bar { background:var(--cream2); border-top:1px solid rgba(42,31,24,.08); padding:56px 64px; display:flex; justify-content:space-between; align-items:center; }
+.next-hint { font-family:'Kalam',cursive; font-size:13px; color:var(--muted); letter-spacing:.2em; }
+.next-link { font-family:'Pacifico',cursive; font-size:clamp(28px,3.5vw,48px); color:var(--ink); text-decoration:none; display:flex; align-items:center; gap:16px; transition:color .2s; cursor:none; }
+.next-link:hover { color:var(--pink); }
+.next-link:hover .arr { transform:translateX(8px); }
+.arr { display:inline-block; transition:transform .3s; font-family:'Kalam',cursive; }
+
+/* ── SOCIAL PILL ── */
+.social-pill { position:fixed; bottom:20px; right:20px; z-index:800; display:flex; flex-direction:column; gap:6px; align-items:flex-end; }
+.pill-link { display:flex; align-items:center; gap:6px; background:rgba(240,232,216,.92); border:1px solid rgba(42,31,24,.1); padding:6px 12px; border-radius:2px; font-family:'Caveat',cursive; font-size:13px; color:var(--muted); text-decoration:none; backdrop-filter:blur(4px); transition:color .2s,border-color .2s; cursor:none; }
+.pill-link:hover { color:var(--pink2); border-color:rgba(196,91,138,.3); }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity:0; transform:translateY(22px); transition:opacity .75s ease,transform .75s ease; }
+.reveal.vis { opacity:1; transform:translateY(0); }
+.rd1{transition-delay:.1s;} .rd2{transition-delay:.2s;} .rd3{transition-delay:.3s;} .rd4{transition-delay:.4s;}
+
+/* ── ANIMATIONS ── */
+@keyframes riseIn  { from{opacity:0;transform:translateY(22px);}  to{opacity:1;transform:translateY(0);} }
+@keyframes fadeIn  { from{opacity:0;} to{opacity:1;} }
+@keyframes fadeSlide { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+@keyframes float   { 0%,100%{transform:translateY(0) rotate(var(--r,0deg));} 50%{transform:translateY(-10px) rotate(var(--r,0deg));} }
+@keyframes floatR  { 0%,100%{transform:translateY(0) rotate(var(--r,0deg));} 50%{transform:translateY(10px) rotate(var(--r,0deg));} }
+@keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+@keyframes stickerPop { 0%{opacity:0;transform:translate(var(--sx,0),var(--sy,0)) scale(0) rotate(var(--sr,0deg));} 60%{transform:translate(var(--sx,0),var(--sy,0)) scale(1.15) rotate(var(--sr,0deg));} 100%{opacity:1;transform:translate(var(--sx,0),var(--sy,0)) scale(1) rotate(var(--sr,0deg));} }
+@keyframes barPulse { from{height:3px;} to{height:12px;} }

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work — Mokshika</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── HERO ── */
+    .work-hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 0 64px 80px;
+      position: relative; overflow: hidden; background: var(--cream2);
+    }
+    .hero-bg-name {
+      position: absolute; bottom: -40px; right: -10px;
+      font-family: 'Pacifico', cursive; font-size: clamp(120px,18vw,240px);
+      color: rgba(232,120,158,.1); line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .wh-tape { position: absolute; top: 100px; right: 80px; background: rgba(232,120,158,.3); padding: 5px 32px; transform: rotate(-4deg); font-family: 'Kalam', cursive; font-size: 15px; color: var(--ink); }
+    .wh-tape2 { position: absolute; top: 155px; right: 52px; background: rgba(240,232,216,.8); padding: 4px 22px; transform: rotate(5deg); font-family: 'Caveat', cursive; font-size: 13px; color: var(--ink); }
+    .wh-eyebrow { font-family: 'Kalam', cursive; font-size: 13px; letter-spacing: .35em; text-transform: uppercase; color: var(--pink2); margin-bottom: 18px; position: relative; z-index: 2; opacity: 0; animation: riseIn .8s ease .3s forwards; }
+    .wh-title { font-family: 'Pacifico', cursive; font-size: clamp(60px,9vw,130px); line-height: .88; color: var(--ink); position: relative; z-index: 2; opacity: 0; animation: riseIn .9s ease .45s forwards; }
+    .wh-title em { color: var(--pink); font-style: normal; }
+    .wh-sub { font-family: 'Special Elite', serif; font-size: 17px; line-height: 1.75; color: rgba(42,31,24,.5); max-width: 460px; margin-top: 28px; position: relative; z-index: 2; opacity: 0; animation: riseIn .9s ease .65s forwards; }
+
+    /* ── SKILLS ── */
+    .skills-section { padding: 100px 64px; background: var(--cream); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .sk-card { background: #fff; padding: 44px 36px; position: relative; box-shadow: 3px 4px 16px rgba(42,31,24,.07); border: 1px solid rgba(42,31,24,.05); transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+    .sk-card:hover { transform: translateY(-7px) rotate(-1.5deg); box-shadow: 6px 12px 28px rgba(42,31,24,.14); }
+    .sk-tape { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 44px; height: 10px; border-radius: 1px; }
+    .sk-icon { font-family: 'Kalam', cursive; font-size: 12px; letter-spacing: .25em; text-transform: uppercase; color: var(--pink2); margin-bottom: 14px; }
+    .sk-title { font-family: 'Pacifico', cursive; font-size: 26px; color: var(--ink); margin-bottom: 16px; }
+    .sk-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .sk-list li { font-family: 'Special Elite', serif; font-size: 15px; color: rgba(42,31,24,.55); display: flex; align-items: center; gap: 10px; }
+    .sk-list li::before { content: '♡'; color: var(--pink); font-size: 11px; }
+
+    /* ── CLUBS ── */
+    .clubs-section { padding: 0 64px 100px; background: var(--cream); }
+    .clubs-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+    .club-card { background: #fff; padding: 40px 36px; position: relative; box-shadow: 3px 4px 16px rgba(42,31,24,.07); border: 1px solid rgba(42,31,24,.05); transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+    .club-card:hover { transform: translateY(-6px) rotate(1deg); }
+    .club-tape { position: absolute; top: -8px; left: 28px; width: 40px; height: 10px; border-radius: 1px; }
+    .club-role { font-family: 'Kalam', cursive; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--pink2); margin-bottom: 10px; }
+    .club-name { font-family: 'Pacifico', cursive; font-size: 22px; color: var(--ink); margin-bottom: 10px; line-height: 1.1; }
+    .club-name em { color: var(--pink); font-style: normal; }
+    .club-desc { font-family: 'Special Elite', serif; font-size: 14px; color: rgba(42,31,24,.5); line-height: 1.7; }
+
+    /* ── ACHIEVEMENTS ── */
+    .ach-section { padding: 100px 64px; background: var(--cream2); }
+    .ach-list { display: flex; flex-direction: column; }
+    .ach-item { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 32px; padding: 28px 0; border-bottom: 1px dashed rgba(42,31,24,.12); transition: padding-left .3s; }
+    .ach-item:hover { padding-left: 14px; }
+    .ach-n { font-family: 'Pacifico', cursive; font-size: 20px; color: var(--pink); }
+    .ach-name { font-family: 'Special Elite', serif; font-size: 19px; color: var(--ink); }
+    .ach-badge { font-family: 'Kalam', cursive; font-size: 13px; background: rgba(232,120,158,.15); border: 1px solid rgba(232,120,158,.3); color: var(--pink2); padding: 3px 12px; transform: rotate(-2deg); display: inline-block; white-space: nowrap; }
+
+    /* ── PROJECTS ── */
+    .proj-section { padding: 0 64px 100px; background: var(--cream2); }
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .proj-card { background: #fff; padding: 52px 44px; position: relative; box-shadow: 3px 4px 16px rgba(42,31,24,.07); border: 1px solid rgba(42,31,24,.05); transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+    .proj-card:hover { transform: translateY(-7px) rotate(-.5deg); box-shadow: 6px 12px 28px rgba(42,31,24,.14); }
+    .proj-tape { position: absolute; top: -8px; right: 32px; width: 44px; height: 10px; background: rgba(232,120,158,.38); border-radius: 1px; }
+    .proj-num { font-family: 'Kalam', cursive; font-size: 12px; letter-spacing: .25em; text-transform: uppercase; color: rgba(42,31,24,.25); margin-bottom: 20px; }
+    .proj-name { font-family: 'Pacifico', cursive; font-size: 32px; color: var(--ink); margin-bottom: 14px; line-height: 1; }
+    .proj-name em { color: var(--pink); font-style: normal; }
+    .proj-desc { font-family: 'Special Elite', serif; font-size: 15px; line-height: 1.8; color: rgba(42,31,24,.5); max-width: 360px; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .proj-tag { font-family: 'Kalam', cursive; font-size: 12px; background: rgba(232,120,158,.12); border: 1px dashed rgba(232,120,158,.35); color: var(--pink2); padding: 3px 10px; transform: rotate(-1deg); display: inline-block; }
+
+    @media(max-width:860px){
+      .work-hero,.skills-section,.clubs-section,.ach-section,.proj-section{padding-left:28px;padding-right:28px;}
+      .skills-grid,.clubs-grid,.proj-grid{grid-template-columns:1fr;}
+      .ach-item{grid-template-columns:36px 1fr;}.ach-badge{display:none;}
+      .next-bar{padding:48px 28px;flex-direction:column;gap:16px;}
+    }
+  </style>
+</head>
+<body>
+<div class="cur-dot" id="cur-dot"></div>
+<div class="cur-ring" id="cur-ring"></div>
+<nav class="topnav">
+  <a href="index.html" class="back-btn">← home</a>
+  <span class="nav-page-label">skills &amp; work</span>
+</nav>
+
+<section class="work-hero">
+  <div class="hero-bg-name">work</div>
+  <div class="wh-tape">my craft ✶</div>
+  <div class="wh-tape2">built with love ♡</div>
+  <p class="wh-eyebrow">[ 02 ] — skills &amp; work</p>
+  <h1 class="wh-title">Skills,<br>Projects &amp;<br><em>Craft.</em></h1>
+  <p class="wh-sub">My technical skills, clubs I lead, achievements earned, and projects I've built with heart.</p>
+</section>
+
+<section class="skills-section">
+  <div class="reveal"><div class="sec-tag">what i build with</div><h2 class="sec-title">Technical <em>Skills</em></h2></div>
+  <div class="skills-grid">
+    <div class="sk-card reveal"><div class="sk-tape" style="background:rgba(232,120,158,.4)"></div><div class="sk-icon">[ web &amp; code ]</div><h3 class="sk-title">Development</h3><ul class="sk-list"><li>HTML5</li><li>CSS3 &amp; Animations</li><li>JavaScript</li><li>Responsive Design</li></ul></div>
+    <div class="sk-card reveal rd1"><div class="sk-tape" style="background:rgba(245,200,66,.5)"></div><div class="sk-icon">[ visual ]</div><h3 class="sk-title">Design</h3><ul class="sk-list"><li>Graphic Design</li><li>UI/UX Thinking</li><li>Digital Creativity</li><li>Brand Identity</li></ul></div>
+    <div class="sk-card reveal rd2"><div class="sk-tape" style="background:rgba(100,180,120,.4)"></div><div class="sk-icon">[ strategy ]</div><h3 class="sk-title">Growth</h3><ul class="sk-list"><li>Lead Generation</li><li>Digital Marketing</li><li>Communication</li><li>Strategic Thinking</li></ul></div>
+  </div>
+</section>
+
+<section class="clubs-section">
+  <div class="reveal"><div class="sec-tag">leadership</div><h2 class="sec-title">Clubs &amp; <em>Roles</em></h2></div>
+  <div class="clubs-grid">
+    <div class="club-card reveal"><div class="club-tape" style="background:rgba(232,120,158,.4)"></div><div class="club-role">senior leadership</div><h3 class="club-name">Deputy <em>Head Girl</em></h3><p class="club-desc">Represented the student body, led school-wide initiatives, bridged students and administration. Strategic planning + public communication.</p></div>
+    <div class="club-card reveal rd1"><div class="club-tape" style="background:rgba(245,200,66,.5)"></div><div class="club-role">club role</div><h3 class="club-name">Interact Club <em>Secretary</em></h3><p class="club-desc">Managed club operations, coordinated community service events, drove social impact projects via Rotary International's Interact program.</p></div>
+    <div class="club-card reveal rd2"><div class="club-tape" style="background:rgba(100,180,230,.4)"></div><div class="club-role">global program</div><h3 class="club-name">Generation Global <em>Ambassador</em></h3><p class="club-desc">Tony Blair Institute's youth dialogue — cross-cultural conversations, representing India in global youth discussions.</p></div>
+    <div class="club-card reveal rd3"><div class="club-tape" style="background:rgba(100,180,120,.4)"></div><div class="club-role">debate &amp; diplomacy</div><h3 class="club-name">Model United <em>Nations</em></h3><p class="club-desc">Active MUN delegate — global policy research, represented nations in committees, sharpened negotiation and public speaking.</p></div>
+  </div>
+</section>
+
+<section class="ach-section">
+  <div class="reveal"><div class="sec-tag">recognition</div><h2 class="sec-title">Achieve&shy;ments <em>✶</em></h2></div>
+  <div class="ach-list">
+    <div class="ach-item reveal"><span class="ach-n">01</span><span class="ach-name">Morgan Stanley International Certification</span><span class="ach-badge">certification</span></div>
+    <div class="ach-item reveal rd1"><span class="ach-n">02</span><span class="ach-name">1st Position — Math Spectrum</span><span class="ach-badge">1st ✦</span></div>
+    <div class="ach-item reveal rd2"><span class="ach-n">03</span><span class="ach-name">1st Place — Zonal Science Exhibition</span><span class="ach-badge">1st ✦</span></div>
+    <div class="ach-item reveal rd3"><span class="ach-n">04</span><span class="ach-name">3rd Place — DOE State Science Exhibition</span><span class="ach-badge">state level</span></div>
+    <div class="ach-item reveal rd4"><span class="ach-n">05</span><span class="ach-name">हिन्दुस्तानी भाषा अकादमी — भाषादूत सम्मान</span><span class="ach-badge">honour ♡</span></div>
+  </div>
+</section>
+
+<section class="proj-section">
+  <div class="reveal"><div class="sec-tag">what i've built</div><h2 class="sec-title">Projects <em>♡</em></h2></div>
+  <div class="proj-grid">
+    <div class="proj-card reveal"><div class="proj-tape"></div><div class="proj-num">[ project 01 ]</div><h3 class="proj-name"><em>Kisan Suvidha</em></h3><p class="proj-desc">A digital platform helping farmers access agricultural knowledge, government schemes, and resources — bridging rural communities with technology.</p><div class="proj-tags"><span class="proj-tag">agritech</span><span class="proj-tag">web design</span><span class="proj-tag">social impact</span><span class="proj-tag">html/css</span></div></div>
+    <div class="proj-card reveal rd1"><div class="proj-tape" style="background:rgba(245,200,66,.45)"></div><div class="proj-num">[ project 02 ]</div><h3 class="proj-name">More <em>soon...</em></h3><p class="proj-desc">Something exciting is in the works — at the intersection of design, tech, and impact. Stay tuned. ✶</p><div class="proj-tags"><span class="proj-tag">in progress</span><span class="proj-tag">2025</span></div></div>
+  </div>
+</section>
+
+<div class="next-bar">
+  <span class="next-hint">[ next page ]</span>
+  <a href="social.html" class="next-link">social links <span class="arr">→</span></a>
+</div>
+<div class="social-pill">
+  <a href="https://pinterest.com/mokshh_prapti/" target="_blank" class="pill-link">📌 pinterest</a>
+  <a href="https://www.instagram.com/mokshh_prapti/" target="_blank" class="pill-link">◎ instagram</a>
+</div>
+
+<script>
+  const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;dot.style.left=mx+'px';dot.style.top=my+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.style.transform='translate(-50%,-50%) scale(1.8)');el.addEventListener('mouseleave',()=>ring.style.transform='translate(-50%,-50%) scale(1)');});
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}}),{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

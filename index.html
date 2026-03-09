@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mokshika Bhardwaj</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Caveat:wght@400;600;700&family=Special+Elite&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      cursor: none;
+    }
+
+    /* ── PAPER TEXTURE BG ── */
+    body {
+      background-color: #f0e8d8;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.06'/%3E%3C/svg%3E");
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 500;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.045'/%3E%3C/svg%3E");
+      opacity: 0.55;
+      mix-blend-mode: multiply;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    .cur-dot {
+      width: 9px; height: 9px;
+      background: #c45b8a;
+      border-radius: 50%;
+      position: fixed; z-index: 9999;
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+    }
+    .cur-ring {
+      width: 26px; height: 26px;
+      border: 1.5px solid rgba(196,91,138,0.45);
+      border-radius: 50%;
+      position: fixed; z-index: 9998;
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      transition: all 0.1s ease;
+    }
+
+    /* ── PAGE ── */
+    .page {
+      position: fixed; inset: 0; z-index: 10;
+      overflow: hidden;
+    }
+
+    /* ── GIANT BG NAME ── */
+    .bg-name {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -44%);
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(120px, 18vw, 240px);
+      color: #e8789e;
+      line-height: 0.88;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.01em;
+      z-index: 1;
+      opacity: 0;
+      animation: nameReveal 1.2s ease 0.1s forwards;
+      text-align: center;
+    }
+
+    /* split name into two lines */
+    .bg-name .line1 { display: block; }
+    .bg-name .line2 { display: block; }
+
+    /* ── PHOTO (cutout, sits on top of name) ── */
+    .hero-photo {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-46%);
+      height: 92vh;
+      width: auto;
+      object-fit: contain;
+      object-position: bottom;
+      z-index: 3;
+      filter: grayscale(1) contrast(1.2) brightness(0.9);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      opacity: 0;
+      animation: photoRise 1.4s cubic-bezier(.16,1,.3,1) 0.25s forwards;
+    }
+
+    /* ── HANDWRITTEN TEXT ── */
+    /* top-left: "Hi. Since you're new here," */
+    .hw-topleft {
+      position: absolute;
+      top: 7%;
+      left: 4%;
+      z-index: 20;
+      font-family: 'Kalam', cursive;
+      font-weight: 300;
+      font-size: clamp(14px, 1.6vw, 22px);
+      color: #2a1f18;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeSlide 1s ease 0.7s forwards;
+    }
+    .hw-topleft .line1 { display: block; }
+    .hw-topleft .line2 {
+      display: block;
+      margin-left: 32px;
+      font-size: clamp(12px, 1.3vw, 18px);
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    /* top-right: "let me be ya tour guide" */
+    .hw-topright {
+      position: absolute;
+      top: 12%;
+      right: 5%;
+      z-index: 20;
+      font-family: 'Kalam', cursive;
+      font-weight: 300;
+      font-size: clamp(12px, 1.3vw, 18px);
+      color: #2a1f18;
+      opacity: 0;
+      text-align: right;
+      animation: fadeSlide 1s ease 0.9s forwards;
+    }
+
+    /* "This is" above photo */
+    .hw-thisis {
+      position: absolute;
+      top: 34%;
+      left: 19%;
+      z-index: 20;
+      font-family: 'Kalam', cursive;
+      font-weight: 400;
+      font-size: clamp(14px, 1.8vw, 24px);
+      color: #2a1f18;
+      transform: rotate(-3deg);
+      opacity: 0;
+      animation: fadeSlide 1s ease 1.0s forwards;
+    }
+
+    /* ── BOTTOM LABELS ── */
+    .bottom-left {
+      position: absolute;
+      bottom: 5%;
+      left: 4%;
+      z-index: 20;
+      font-family: 'Special Elite', serif;
+      font-size: clamp(10px, 1vw, 14px);
+      color: rgba(42,31,24,0.45);
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.2s forwards;
+    }
+    .bottom-right {
+      position: absolute;
+      bottom: 5%;
+      right: 4%;
+      z-index: 20;
+      font-family: 'Special Elite', serif;
+      font-size: clamp(10px, 1vw, 14px);
+      color: rgba(42,31,24,0.45);
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.2s forwards;
+    }
+
+    /* ── NAV BUTTONS ── */
+    /* Left group: about + skills — anchored to left edge */
+    .nav-left {
+      position: absolute;
+      bottom: 10%;
+      left: 4%;
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+      opacity: 0;
+      animation: fadeSlide 1s ease 1.1s forwards;
+    }
+    /* Right group: social + contact — anchored to right edge */
+    .nav-right {
+      position: absolute;
+      bottom: 10%;
+      right: 4%;
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-end;
+      opacity: 0;
+      animation: fadeSlide 1s ease 1.1s forwards;
+    }
+    .nav-btn {
+      display: block;
+      cursor: none;
+      transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), filter 0.3s;
+    }
+    .nav-btn img {
+      height: 44px;
+      width: auto;
+      display: block;
+      filter: sepia(0.1) brightness(0.9);
+      transition: filter 0.3s;
+    }
+    .nav-left .nav-btn:hover {
+      transform: translateX(-6px) rotate(-2deg) scale(1.08);
+    }
+    .nav-right .nav-btn:hover {
+      transform: translateX(6px) rotate(2deg) scale(1.08);
+    }
+    .nav-btn:hover img {
+      filter: sepia(0) brightness(1);
+    }
+
+    /* ── MUSIC PLAYER ── */
+    .music-player {
+      position: fixed; bottom: 20px; left: 20px; z-index: 600;
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(240,232,216,0.88);
+      border: 1px solid rgba(42,31,24,0.12);
+      padding: 8px 14px; border-radius: 2px;
+      font-family: 'Caveat', cursive;
+      font-size: 14px; color: rgba(42,31,24,0.55);
+      cursor: none;
+      backdrop-filter: blur(6px);
+    }
+    .music-btn {
+      width: 26px; height: 26px;
+      border: 1.5px solid rgba(196,91,138,0.4);
+      border-radius: 50%; background: transparent;
+      color: #c45b8a; font-size: 11px;
+      cursor: none; display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .music-btn:hover { border-color: #c45b8a; }
+    .music-bar { display: flex; align-items: flex-end; gap: 2px; height: 12px; }
+    .music-bar span {
+      width: 3px; background: #c45b8a; border-radius: 1px;
+      animation: barPulse 0.6s ease-in-out infinite alternate;
+    }
+    .music-bar span:nth-child(2) { animation-delay: 0.15s; }
+    .music-bar span:nth-child(3) { animation-delay: 0.3s; }
+    .music-bar.paused span { animation-play-state: paused; height: 3px !important; }
+
+    /* ── SOCIAL PILL ── */
+    .social-pill {
+      position: fixed; bottom: 20px; right: 20px; z-index: 600;
+      display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
+    }
+    .pill-link {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(240,232,216,0.88);
+      border: 1px solid rgba(42,31,24,0.1);
+      padding: 6px 12px; border-radius: 2px;
+      font-family: 'Caveat', cursive; font-size: 13px;
+      color: rgba(42,31,24,0.5); text-decoration: none;
+      backdrop-filter: blur(6px);
+      transition: color 0.2s, border-color 0.2s; cursor: none;
+    }
+    .pill-link:hover { color: #c45b8a; border-color: rgba(196,91,138,0.3); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes nameReveal {
+      from { opacity: 0; transform: translate(-50%, -42%) scale(0.96); }
+      to   { opacity: 1; transform: translate(-50%, -44%) scale(1); }
+    }
+    @keyframes photoRise {
+      from { opacity: 0; transform: translateX(-46%) translateY(30px); }
+      to   { opacity: 1; transform: translateX(-46%) translateY(0); }
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes barPulse {
+      from { height: 3px; }
+      to   { height: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cur-dot" id="cur-dot"></div>
+<div class="cur-ring" id="cur-ring"></div>
+
+<div class="page">
+
+  <!-- GIANT BG NAME -->
+  <div class="bg-name">
+    <span class="line1">Mokshika</span>
+    <span class="line2">Bhardwaj</span>
+  </div>
+
+  <!-- PHOTO CUTOUT -->
+  <img src="assets/mokshika_hero.png" class="hero-photo" alt="Mokshika Bhardwaj">
+
+  <!-- HANDWRITTEN TEXT -->
+  <div class="hw-topleft">
+    <span class="line1">Hi. Since you're new here,</span>
+    <span class="line2">let me be ya tour guide ↓</span>
+  </div>
+  <div class="hw-thisis">This is</div>
+  <!-- BOTTOM LABELS -->
+  <div class="bottom-left">CS Student / Creative / Leader</div>
+  <div class="bottom-right">By Mokshika Bhardwaj</div>
+
+  <!-- NAV LEFT: About + Skills -->
+  <nav class="nav-left">
+    <a href="about.html" class="nav-btn">
+      <img src="assets/index_aboutme.png" alt="About Me">
+    </a>
+    <a href="work.html" class="nav-btn">
+      <img src="assets/index_skillsproject.png" alt="Skills & Projects">
+    </a>
+  </nav>
+
+  <!-- NAV RIGHT: Social + Contact -->
+  <nav class="nav-right">
+    <a href="social.html" class="nav-btn">
+      <img src="assets/index_social.png" alt="Social">
+    </a>
+    <a href="contact.html" class="nav-btn">
+      <img src="assets/index_contact.png" alt="Contact">
+    </a>
+  </nav>
+
+</div>
+
+<!-- MUSIC -->
+<audio id="bg-audio" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-ukulele.mp3" type="audio/mpeg">
+</audio>
+<div class="music-player">
+  <button class="music-btn" id="music-btn">♪</button>
+  <div class="music-bar paused" id="music-bars">
+    <span style="height:3px"></span>
+    <span style="height:3px"></span>
+    <span style="height:3px"></span>
+  </div>
+  <span id="music-label" style="font-size:13px;">play music</span>
+</div>
+
+<!-- SOCIAL PILL -->
+<div class="social-pill">
+  <a href="https://pinterest.com/mokshh_prapti/" target="_blank" class="pill-link">📌 pinterest</a>
+  <a href="https://www.instagram.com/mokshh_prapti/" target="_blank" class="pill-link">◎ instagram</a>
+</div>
+
+<script>
+  // Cursor
+  const dot = document.getElementById('cur-dot');
+  const ring = document.getElementById('cur-ring');
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function loop() {
+    rx += (mx-rx)*0.13; ry += (my-ry)*0.13;
+    dot.style.left = mx+'px'; dot.style.top = my+'px';
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.style.transform = 'translate(-50%,-50%) scale(1.8)');
+    el.addEventListener('mouseleave', () => ring.style.transform = 'translate(-50%,-50%) scale(1)');
+  });
+
+  // Music
+  const btn = document.getElementById('music-btn');
+  const bars = document.getElementById('music-bars');
+  const label = document.getElementById('music-label');
+  const audio = document.getElementById('bg-audio');
+  let playing = false;
+  btn.addEventListener('click', () => {
+    if (playing) {
+      audio.pause(); btn.textContent='♪';
+      bars.classList.add('paused'); label.textContent='play music';
+    } else {
+      audio.volume=0.15; audio.play().catch(()=>{});
+      btn.textContent='‖'; bars.classList.remove('paused'); label.textContent='now playing ♪';
+    }
+    playing = !playing;
+  });
+</script>
+</body>
+</html>

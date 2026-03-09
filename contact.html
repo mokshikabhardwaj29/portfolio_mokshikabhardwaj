@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Mokshika</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:120px 64px 80px; position:relative; overflow:hidden; background:var(--cream); }
+    .ch-bg-word { position:absolute; bottom:-50px; right:-20px; font-family:'Pacifico',cursive; font-size:clamp(160px,22vw,320px); color:rgba(232,120,158,.07); line-height:1; pointer-events:none; user-select:none; }
+    .ch-tape-1 { position:absolute; top:90px; right:140px; background:rgba(232,120,158,.3); padding:5px 32px; transform:rotate(-4deg); font-family:'Kalam',cursive; font-size:15px; color:var(--ink); }
+    .ch-tape-2 { position:absolute; top:148px; right:90px; background:rgba(240,232,216,.9); padding:4px 22px; transform:rotate(5deg); font-family:'Caveat',cursive; font-size:13px; color:var(--ink); border:1px solid rgba(42,31,24,.08); }
+    .ch-star { position:absolute; top:108px; left:58%; font-size:32px; color:rgba(232,120,158,.2); animation:float 3.5s ease-in-out infinite; --r:-8deg; }
+    .ch-eyebrow { font-family:'Kalam',cursive; font-size:13px; letter-spacing:.35em; text-transform:uppercase; color:var(--pink2); margin-bottom:18px; opacity:0; animation:riseIn .8s ease .3s forwards; position:relative; z-index:2; }
+    .ch-title { font-family:'Pacifico',cursive; font-size:clamp(64px,10vw,140px); line-height:.86; color:var(--ink); opacity:0; animation:riseIn .9s ease .45s forwards; position:relative; z-index:2; }
+    .ch-title em { color:var(--pink); font-style:normal; }
+    .ch-sub { font-family:'Special Elite',serif; font-size:18px; line-height:1.75; color:rgba(42,31,24,.45); max-width:520px; margin-top:28px; opacity:0; animation:riseIn .9s ease .65s forwards; position:relative; z-index:2; }
+
+    /* ID SECTION */
+    .id-section { padding:100px 64px; background:var(--cream2); display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:start; }
+    .id-card { background:#fff; padding:52px 48px; position:relative; box-shadow:4px 6px 20px rgba(42,31,24,.1); border:1px solid rgba(42,31,24,.05); transform:rotate(-1.5deg); }
+    .id-card::before { content:''; position:absolute; top:-10px; left:50%; transform:translateX(-50%); width:56px; height:12px; background:rgba(232,120,158,.4); border-radius:1px; }
+    .id-top-label { font-family:'Kalam',cursive; font-size:11px; letter-spacing:.35em; text-transform:uppercase; color:var(--pink2); margin-bottom:28px; }
+    .id-name { font-family:'Pacifico',cursive; font-size:38px; color:var(--ink); line-height:1; margin-bottom:8px; }
+    .id-name em { color:var(--pink); font-style:normal; }
+    .id-role { font-family:'Kalam',cursive; font-size:16px; color:rgba(42,31,24,.4); margin-bottom:40px; }
+    .id-row { margin-bottom:16px; }
+    .id-row-label { font-family:'Kalam',cursive; font-size:11px; letter-spacing:.25em; text-transform:uppercase; color:rgba(42,31,24,.3); margin-bottom:4px; }
+    .id-row-val { font-family:'Special Elite',serif; font-size:15px; color:rgba(42,31,24,.7); }
+    .id-row-val a { color:var(--pink2); text-decoration:none; transition:opacity .2s; }
+    .id-row-val a:hover { opacity:.7; }
+    .id-sig { font-family:'Kalam',cursive; font-size:28px; color:var(--pink); margin-top:36px; transform:rotate(-2deg); display:inline-block; }
+    .id-stamp { position:absolute; bottom:24px; right:24px; border:3px solid rgba(232,120,158,.5); padding:4px 10px; font-family:'Special Elite',serif; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:rgba(232,120,158,.5); transform:rotate(-7deg); }
+
+    .methods-col { display:flex; flex-direction:column; gap:0; padding-top:16px; }
+    .method-item { padding:28px 0; border-bottom:1px dashed rgba(42,31,24,.12); text-decoration:none; color:var(--ink); display:flex; align-items:center; justify-content:space-between; transition:padding-left .3s; cursor:none; }
+    .method-item:hover { padding-left:14px; }
+    .method-item:hover .m-arrow { transform:translateX(6px); color:var(--pink); }
+    .m-type { font-family:'Kalam',cursive; font-size:11px; letter-spacing:.25em; text-transform:uppercase; color:var(--pink2); margin-bottom:6px; }
+    .m-val { font-family:'Pacifico',cursive; font-size:22px; color:var(--ink); }
+    .m-arrow { font-size:22px; color:rgba(42,31,24,.2); transition:transform .3s,color .2s; }
+
+    /* bottom strip */
+    .bottom-strip { background:var(--cream); border-top:1px solid rgba(42,31,24,.06); padding:80px 64px; text-align:center; }
+    .bs-quote { font-family:'Kalam',cursive; font-size:clamp(22px,3.5vw,44px); color:rgba(42,31,24,.35); transform:rotate(-1.5deg); display:inline-block; margin-bottom:24px; }
+    .bs-quote em { color:var(--pink); font-style:normal; }
+    .bh-link { display:inline-flex; align-items:center; gap:12px; font-family:'Pacifico',cursive; font-size:clamp(20px,2.5vw,32px); color:rgba(42,31,24,.4); text-decoration:none; transition:color .2s; cursor:none; margin-top:16px; }
+    .bh-link:hover { color:var(--pink); }
+
+    @media(max-width:860px){
+      .contact-hero,.id-section,.bottom-strip{padding-left:28px;padding-right:28px;}
+      .id-section{grid-template-columns:1fr;}
+      .next-bar{padding:48px 28px;flex-direction:column;gap:16px;}
+    }
+  </style>
+</head>
+<body>
+<div class="cur-dot" id="cur-dot"></div>
+<div class="cur-ring" id="cur-ring"></div>
+<nav class="topnav">
+  <a href="index.html" class="back-btn">← home</a>
+  <span class="nav-page-label">contact</span>
+</nav>
+
+<section class="contact-hero">
+  <div class="ch-bg-word">hello.</div>
+  <div class="ch-tape-1">get in touch ✦</div>
+  <div class="ch-tape-2">i write back ♡</div>
+  <span class="ch-star">✶</span>
+  <p class="ch-eyebrow">[ 04 ] — contact</p>
+  <h1 class="ch-title">Say<br><em>Hello.</em></h1>
+  <p class="ch-sub">Open to collaborations, creative projects, internships, and interesting conversations. Drop me a line — I always write back.</p>
+</section>
+
+<section class="id-section">
+  <div class="id-card reveal">
+    <div class="id-top-label">[ identity card ]</div>
+    <div class="id-name">Mokshika<br><em>Bhardwaj</em></div>
+    <div class="id-role">B.Tech CS · BV'29</div>
+    <div class="id-row"><div class="id-row-label">Email</div><div class="id-row-val"><a href="mailto:mkshikabhardwaj@gmail.com">mkshikabhardwaj@gmail.com</a></div></div>
+    <div class="id-row"><div class="id-row-label">LinkedIn</div><div class="id-row-val"><a href="https://www.linkedin.com/in/mokshika-bhardwaj-4b5b54285" target="_blank">mokshika-bhardwaj</a></div></div>
+    <div class="id-row"><div class="id-row-label">Instagram</div><div class="id-row-val"><a href="https://www.instagram.com/mokshh_prapti/" target="_blank">@mokshh_prapti</a></div></div>
+    <div class="id-row"><div class="id-row-label">Pinterest</div><div class="id-row-val"><a href="https://pinterest.com/mokshh_prapti/" target="_blank">mokshh_prapti</a></div></div>
+    <div class="id-row"><div class="id-row-label">Location</div><div class="id-row-val">Banasthali Vidyapith, Rajasthan, India</div></div>
+    <div class="id-sig">let's build something ✶</div>
+    <div class="id-stamp">2025</div>
+  </div>
+  <div class="methods-col reveal rd1">
+    <a href="mailto:mkshikabhardwaj@gmail.com" class="method-item"><div><div class="m-type">[ email ]</div><div class="m-val">Drop a message</div></div><span class="m-arrow">→</span></a>
+    <a href="https://www.linkedin.com/in/mokshika-bhardwaj-4b5b54285" target="_blank" class="method-item"><div><div class="m-type">[ linkedin ]</div><div class="m-val">Connect with me</div></div><span class="m-arrow">→</span></a>
+    <a href="https://www.instagram.com/mokshh_prapti/" target="_blank" class="method-item"><div><div class="m-type">[ instagram ]</div><div class="m-val">@mokshh_prapti</div></div><span class="m-arrow">→</span></a>
+    <a href="https://pinterest.com/mokshh_prapti/" target="_blank" class="method-item"><div><div class="m-type">[ pinterest ]</div><div class="m-val">mokshh_prapti</div></div><span class="m-arrow">→</span></a>
+  </div>
+</section>
+
+<div class="bottom-strip">
+  <div class="bs-quote reveal">"life is too short to make a <em>boring</em> portfolio." ✶</div><br>
+  <a href="index.html" class="bh-link reveal rd1">← back to home</a>
+</div>
+
+<div class="social-pill">
+  <a href="https://pinterest.com/mokshh_prapti/" target="_blank" class="pill-link">📌 pinterest</a>
+  <a href="https://www.instagram.com/mokshh_prapti/" target="_blank" class="pill-link">◎ instagram</a>
+</div>
+
+<script>
+  const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;dot.style.left=mx+'px';dot.style.top=my+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.style.transform='translate(-50%,-50%) scale(1.8)');el.addEventListener('mouseleave',()=>ring.style.transform='translate(-50%,-50%) scale(1)');});
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}}),{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

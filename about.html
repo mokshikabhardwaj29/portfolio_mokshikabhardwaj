@@ -249,7 +249,7 @@
       font-family: 'Kalam', cursive; font-size: 16px; color: var(--ink);
       white-space: nowrap;
       opacity: 0;
-      animation: stickerPop .6s cubic-bezier(.34,1.56,.64,1) .4s forwards, float 4s ease-in-out 1s infinite;
+      animation: thoughtPop .6s cubic-bezier(.34,1.56,.64,1) .4s forwards, thoughtFloat 4s ease-in-out 1s infinite;
       --sx:0; --sy:0; --sr:0deg; --r:0deg;
     }
     .thought-bubble::after {
@@ -275,6 +275,56 @@
     .gal-cap { font-family:'Kalam',cursive; font-size:14px; color:var(--ink); text-align:center; margin-top:8px; }
     .gal-tape { position:absolute; top:-8px; left:50%; transform:translateX(-50%); width:44px; height:10px; background:rgba(232,120,158,.38); border-radius:1px; }
 
+    /* ── LAPTOP / DESKTOP: bring stickers into a balanced orbit around the portrait ── */
+    @media (min-width: 1100px) {
+      .mem-stage { min-height: 640px; padding: 32px 0; }
+      .mem-photo { width: 360px; }
+      .mem-photo img { height: 440px; }
+
+      .stk-1  { top: 7%;  left: calc(50% - 350px); right: auto; --sx: -38px; --sy: -28px; }
+      .stk-2  { top: 9%;  right: calc(50% - 360px); left: auto; --sx: 38px; --sy: -30px; }
+      .stk-3  { top: 22%; left: calc(50% - 350px); right: auto; --sx: -42px; --sy: 6px; }
+      .stk-4  { top: 24%; right: calc(50% - 278px); left: auto; --sx: 32px; --sy: 8px; }
+      .stk-5  { top: 43%; left: calc(50% - 320px); right: auto; --sx: -32px; --sy: 18px; }
+      .stk-6  { top: 43%; right: calc(50% - 350px); left: auto; --sx: 36px; --sy: 18px; }
+      .stk-7  { top: 61%; left: calc(50% - 248px); right: auto; --sx: -24px; --sy: 26px; }
+      .stk-8  { top: 63%; right: calc(50% - 325px); left: auto; --sx: 26px; --sy: 24px; }
+      .stk-9  { top: 72%; left: calc(50% - 350px); right: auto; --sx: -18px; --sy: 32px; }
+      .stk-10 { top: 72%; right: calc(50% - 278px); left: auto; --sx: 18px; --sy: 30px; }
+
+      .thought-bubble { top: 3%; left: 50%; max-width: 360px; white-space: nowrap; }
+    }
+
+    /* ── COMPACT LAPTOPS: smaller portrait and proportionate side spacing ── */
+    @media (min-width: 861px) and (max-width: 1099px) {
+      .mem-stage { min-height: 620px; padding: 30px 0; }
+      .mem-photo { width: 320px; }
+      .mem-photo img { height: 400px; }
+
+      .stk-1  { top: 7%;  left: calc(50% - 326px); right: auto; --sx: -30px; --sy: -22px; }
+      .stk-2  { top: 9%;  right: calc(50% - 335px); left: auto; --sx: 30px; --sy: -24px; }
+      .stk-3  { top: 22%; left: calc(50% - 326px); right: auto; --sx: -34px; --sy: 5px; }
+      .stk-4  { top: 24%; right: calc(50% - 258px); left: auto; --sx: 28px; --sy: 6px; }
+      .stk-5  { top: 43%; left: calc(50% - 294px); right: auto; --sx: -28px; --sy: 14px; }
+      .stk-6  { top: 43%; right: calc(50% - 326px); left: auto; --sx: 30px; --sy: 14px; }
+      .stk-7  { top: 61%; left: calc(50% - 222px); right: auto; --sx: -20px; --sy: 20px; }
+      .stk-8  { top: 63%; right: calc(50% - 300px); left: auto; --sx: 22px; --sy: 20px; }
+      .stk-9  { top: 72%; left: calc(50% - 326px); right: auto; --sx: -14px; --sy: 24px; }
+      .stk-10 { top: 72%; right: calc(50% - 258px); left: auto; --sx: 14px; --sy: 24px; }
+
+      .thought-bubble { top: 3%; left: 50%; max-width: 320px; white-space: nowrap; }
+    }
+
+    /* Keep the thought bubble centered through its entrance and float animations. */
+    @keyframes thoughtPop {
+      0% { opacity: 0; transform: translateX(-50%) translateY(10px) scale(.92); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+    }
+    @keyframes thoughtFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-7px); }
+    }
+
     /* ── RESPONSIVE ── */
     @media(max-width:860px){
       .about-hero{grid-template-columns:1fr;}
@@ -285,6 +335,58 @@
       .next-bar{padding:48px 28px;flex-direction:column;gap:16px;text-align:center;}
       .stk-polaroid img{width:90px;height:90px;}
       .banner-item{font-size:16px;}
+    }
+
+    /* ── MOBILE: smaller centered portrait with a compact sticker frame ── */
+    @media (max-width: 860px) {
+      .mem-stage {
+        display: block;
+        position: relative;
+        min-height: clamp(680px, 190vw, 760px);
+        padding: 0 10px;
+      }
+
+      .mem-photo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: min(62vw, 250px);
+        z-index: 6;
+      }
+      .mem-photo img {
+        width: 100%;
+        height: clamp(260px, 78vw, 310px);
+      }
+
+      .thought-bubble {
+        top: 22px;
+        left: 50%;
+        width: max-content;
+        max-width: calc(100% - 32px);
+        padding: 8px 14px;
+        font-size: 13px;
+        white-space: normal;
+        text-align: center;
+      }
+
+      .stk-polaroid { padding: 5px 5px 20px; }
+      .stk-polaroid img { width: 58px; height: 58px; }
+      .stk-polaroid-cap { font-size: 10px; margin-top: 4px; }
+      .stk-text { font-size: 12px; padding: 5px 9px; }
+      .stk-word { font-size: 15px; }
+      .stk-emoji { font-size: 28px; }
+
+      .stk-1  { top: 20%; left: 4%; right: auto; --sx: -14px; --sy: -12px; }
+      .stk-2  { top: 20%; right: 4%; left: auto; --sx: 14px; --sy: -12px; }
+      .stk-3  { top: 42%; left: 2%; right: auto; --sx: -12px; --sy: 4px; }
+      .stk-4  { top: 46%; right: 4%; left: auto; --sx: 12px; --sy: 4px; }
+      .stk-5  { top: 62%; left: 4%; right: auto; --sx: -12px; --sy: 12px; }
+      .stk-6  { top: 42%; right: 2%; left: auto; --sx: 12px; --sy: 6px; }
+      .stk-7  { top: 68%; left: 8%; right: auto; --sx: -8px; --sy: 14px; }
+      .stk-8  { top: 65%; right: 5%; left: auto; --sx: 8px; --sy: 14px; }
+      .stk-9  { top: 78%; left: 12%; right: auto; --sx: -8px; --sy: 12px; }
+      .stk-10 { top: 78%; right: 12%; left: auto; --sx: 8px; --sy: 12px; }
     }
   </style>
 </head>

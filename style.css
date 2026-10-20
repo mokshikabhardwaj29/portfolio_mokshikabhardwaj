@@ -92,8 +92,9 @@ body::after {
 @keyframes riseIn  { from{opacity:0;transform:translateY(22px);}  to{opacity:1;transform:translateY(0);} }
 @keyframes fadeIn  { from{opacity:0;} to{opacity:1;} }
 @keyframes fadeSlide { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
-@keyframes float   { 0%,100%{transform:translateY(0) rotate(var(--r,0deg));} 50%{transform:translateY(-10px) rotate(var(--r,0deg));} }
-@keyframes floatR  { 0%,100%{transform:translateY(0) rotate(var(--r,0deg));} 50%{transform:translateY(10px) rotate(var(--r,0deg));} }
+@keyframes float   { 0%,100%{translate:0 0;} 50%{translate:0 -7px;} }
+@keyframes floatR  { 0%,100%{translate:0 0;} 50%{translate:0 7px;} }
 @keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
-@keyframes stickerPop { 0%{opacity:0;transform:translate(var(--sx,0),var(--sy,0)) scale(0) rotate(var(--sr,0deg));} 60%{transform:translate(var(--sx,0),var(--sy,0)) scale(1.15) rotate(var(--sr,0deg));} 100%{opacity:1;transform:translate(var(--sx,0),var(--sy,0)) scale(1) rotate(var(--sr,0deg));} }
+/* Entrance transform and gentle floating now use separate CSS properties, so they no longer compete. */
+@keyframes stickerPop { 0%{opacity:0;transform:translate(var(--sx,0),var(--sy,0)) scale(.96) rotate(var(--sr,0deg));} 68%{opacity:1;transform:translate(0,0) scale(1.02) rotate(var(--r,var(--sr,0deg)));} 100%{opacity:1;transform:translate(0,0) scale(1) rotate(var(--r,var(--sr,0deg)));} }
 @keyframes barPulse { from{height:3px;} to{height:12px;} }

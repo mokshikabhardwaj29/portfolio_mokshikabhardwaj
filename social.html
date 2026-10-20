@@ -43,6 +43,42 @@
       .link-cards{grid-template-columns:1fr;}
       .next-bar{padding:48px 28px;flex-direction:column;gap:16px;}
     }
+  
+    /* ── PROFESSIONAL TECH SYSTEM: CONNECT ── */
+    .sh-left::before {
+      background:
+        radial-gradient(ellipse at 30% 60%, rgba(232,120,158,.10) 0%, transparent 70%),
+        linear-gradient(rgba(36,107,128,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36,107,128,.04) 1px, transparent 1px);
+      background-size: auto, 42px 42px, 42px 42px;
+    }
+    .sh-eyebrow, .lc-platform { font-family: 'DM Sans', sans-serif; font-weight: 700; color: var(--tech); letter-spacing: .12em; }
+    .sh-title em { color: var(--tech); }
+    .sh-sub { color: rgba(28,42,51,.72); }
+    .sh-note { color: var(--pink2); }
+    .link-card {
+      background: linear-gradient(145deg, #fff 0%, rgba(53,164,189,.045) 100%);
+      border: 1px solid var(--tech-line);
+      border-top: 3px solid var(--tech);
+      border-radius: 9px;
+      box-shadow: 0 8px 26px rgba(28,42,51,.055);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .link-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px rgba(36,107,128,.12);
+      border-color: rgba(36,107,128,.35);
+    }
+    .lc-tape { height: 4px; width: 36px; border-radius: 4px; top: 0; background: var(--tech-bright) !important; opacity: .55; }
+    .lc-name { color: var(--ink); }
+    .link-card:hover .lc-name, .link-card:hover .lc-arrow { color: var(--tech); }
+    .lc-handle { font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(28,42,51,.62); }
+    .lc-arrow { color: rgba(36,107,128,.42); }
+    @media (max-width: 860px) {
+      .sh-left { background-image: linear-gradient(rgba(36,107,128,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(36,107,128,.025) 1px, transparent 1px); background-size: 36px 36px; }
+      .link-card { padding: 34px 26px; }
+    }
+
   </style>
 </head>
 <body>

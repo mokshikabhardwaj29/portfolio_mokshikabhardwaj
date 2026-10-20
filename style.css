@@ -11,6 +11,10 @@
   --ink:    #2a1f18;
   --pink:   #e8789e;
   --pink2:  #c45b8a;
+  --tech:   #287b91;
+  --tech-bright: #49a9ba;
+  --tech-line: rgba(40,123,145,0.24);
+  --tech-wash: rgba(73,169,186,0.09);
   --muted:  rgba(42,31,24,0.45);
   --tape:   rgba(240,232,216,0.75);
 }
@@ -48,13 +52,13 @@ body::after {
 }
 
 /* ── CURSOR ── */
-.cur-dot { width:9px; height:9px; background:var(--pink2); border-radius:50%; position:fixed; z-index:9999; pointer-events:none; transform:translate(-50%,-50%); }
-.cur-ring { width:26px; height:26px; border:1.5px solid rgba(196,91,138,0.4); border-radius:50%; position:fixed; z-index:9998; pointer-events:none; transform:translate(-50%,-50%); transition:all 0.5s ease; }
+.cur-dot { width:9px; height:9px; background:var(--tech); border-radius:50%; position:fixed; z-index:9999; pointer-events:none; transform:translate(-50%,-50%); }
+.cur-ring { width:26px; height:26px; border:1.5px solid var(--tech-line); border-radius:50%; position:fixed; z-index:9998; pointer-events:none; transform:translate(-50%,-50%); transition:all 0.5s ease; }
 
 /* ── TOP NAV ── */
 .topnav { position:fixed; top:0; left:0; right:0; z-index:800; padding:20px 36px; display:flex; justify-content:space-between; align-items:center; }
 .back-btn { font-family:'Kalam',cursive; font-size:16px; color:var(--muted); text-decoration:none; transition:color .2s; cursor:none; display:flex; align-items:center; gap:8px; }
-.back-btn:hover { color:var(--pink2); }
+.back-btn:hover { color:var(--tech); }
 .nav-page-label { font-family:'Kalam',cursive; font-size:13px; color:var(--muted); letter-spacing:0.1em; }
 
 /* ── WASHI TAPE ── */
@@ -74,14 +78,14 @@ body::after {
 .next-bar { background:var(--cream2); border-top:1px solid rgba(42,31,24,.08); padding:56px 64px; display:flex; justify-content:space-between; align-items:center; }
 .next-hint { font-family:'Kalam',cursive; font-size:13px; color:var(--muted); letter-spacing:.2em; }
 .next-link { font-family:'Playfair Display', serif; font-size:clamp(28px,3.5vw,48px); color:var(--ink); text-decoration:none; display:flex; align-items:center; gap:16px; transition:color .2s; cursor:none; }
-.next-link:hover { color:var(--pink); }
+.next-link:hover { color:var(--tech); }
 .next-link:hover .arr { transform:translateX(8px); }
 .arr { display:inline-block; transition:transform .3s; font-family:'Kalam',cursive; }
 
 /* ── SOCIAL PILL ── */
 .social-pill { position:fixed; bottom:20px; right:20px; z-index:800; display:flex; flex-direction:column; gap:6px; align-items:flex-end; }
 .pill-link { display:flex; align-items:center; gap:6px; background:rgba(240,232,216,.92); border:1px solid rgba(42,31,24,.1); padding:6px 12px; border-radius:2px; font-family:'Caveat',cursive; font-size:13px; color:var(--muted); text-decoration:none; backdrop-filter:blur(4px); transition:color .2s,border-color .2s; cursor:none; }
-.pill-link:hover { color:var(--pink2); border-color:rgba(196,91,138,.3); }
+.pill-link:hover { color:var(--tech); border-color:var(--tech-line); }
 
 /* ── SCROLL REVEAL ── */
 .reveal { opacity:0; transform:translateY(22px); transition:opacity .75s ease,transform .75s ease; }
@@ -98,3 +102,19 @@ body::after {
 /* Entrance transform and gentle floating now use separate CSS properties, so they no longer compete. */
 @keyframes stickerPop { 0%{opacity:0;transform:translate(var(--sx,0),var(--sy,0)) scale(.96) rotate(var(--sr,0deg));} 68%{opacity:1;transform:translate(0,0) scale(1.02) rotate(var(--r,var(--sr,0deg)));} 100%{opacity:1;transform:translate(0,0) scale(1) rotate(var(--r,var(--sr,0deg)));} }
 @keyframes barPulse { from{height:3px;} to{height:12px;} }
+
+/* ── SUBTLE TECH ACCENTS ──
+   Cool blue-green details add a developer feel without losing the scrapbook warmth. */
+::selection { background: rgba(73,169,186,.22); color: var(--ink); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--tech-bright);
+  outline-offset: 4px;
+}
+.sec-tag::after {
+  content: " //";
+  color: rgba(255,255,255,.78);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+

@@ -53,6 +53,61 @@
       .id-section{grid-template-columns:1fr;}
       .next-bar{padding:48px 28px;flex-direction:column;gap:16px;}
     }
+  
+    /* ── PROFESSIONAL TECH SYSTEM: CONTACT ── */
+    .contact-hero {
+      background-color: var(--cream);
+      background-image:
+        radial-gradient(ellipse at 82% 20%, rgba(53,164,189,.12), transparent 34%),
+        linear-gradient(rgba(36,107,128,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36,107,128,.04) 1px, transparent 1px);
+      background-size: auto, 42px 42px, 42px 42px;
+    }
+    .ch-eyebrow, .id-top-label, .id-row-label, .m-type {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      color: var(--tech);
+      letter-spacing: .12em;
+    }
+    .ch-title em, .id-name em { color: var(--tech); }
+    .ch-sub { color: rgba(28,42,51,.72); }
+    .id-section {
+      background-image:
+        linear-gradient(rgba(36,107,128,.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36,107,128,.026) 1px, transparent 1px);
+      background-size: 42px 42px;
+    }
+    .id-card {
+      transform: none;
+      border: 1px solid var(--tech-line);
+      border-top: 4px solid var(--tech);
+      border-radius: 10px;
+      box-shadow: 0 12px 32px rgba(28,42,51,.08);
+    }
+    .id-card::before { background: var(--tech-bright); width: 42px; height: 4px; top: 0; border-radius: 0 0 4px 4px; }
+    .id-role { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: rgba(28,42,51,.62); line-height: 1.6; }
+    .id-row-label { font-size: 10px; }
+    .id-row-val { color: rgba(28,42,51,.84); overflow-wrap: anywhere; }
+    .id-row-val a { color: var(--tech); }
+    .id-sig { color: var(--pink2); }
+    .id-stamp { color: var(--tech); border-color: var(--tech-line); border-width: 1px; border-radius: 4px; transform: rotate(-3deg); }
+    .method-item { border-bottom: 1px solid var(--tech-line); }
+    .method-item:hover { padding-left: 10px; }
+    .method-item:hover .m-arrow, .bh-link:hover { color: var(--tech); }
+    .m-val { font-size: 20px; }
+    .m-arrow { color: rgba(36,107,128,.42); }
+    .bottom-strip {
+      background: linear-gradient(120deg, #1c2a33 0%, #244653 100%);
+      border-top: 3px solid var(--tech-bright);
+    }
+    .bs-quote { color: rgba(243,247,247,.75); transform: none; }
+    .bs-quote em, .bh-link { color: #75d0de; }
+    @media (max-width: 860px) {
+      .contact-hero { background-size: auto, 34px 34px, 34px 34px; }
+      .id-card { padding: 38px 28px; }
+      .bottom-strip { padding-top: 56px; padding-bottom: 56px; }
+    }
+
   </style>
 </head>
 <body>

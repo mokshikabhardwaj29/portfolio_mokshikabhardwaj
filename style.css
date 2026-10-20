@@ -6,24 +6,28 @@
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --cream:  #f0e8d8;
-  --cream2: #ece3d0;
-  --ink:    #2a1f18;
+  --cream:  #f3ecdf;
+  --cream2: #e9e2d4;
+  --ink:    #1c2a33;
   --pink:   #e8789e;
-  --pink2:  #c45b8a;
-  --tech:   #287b91;
-  --tech-bright: #49a9ba;
-  --tech-line: rgba(40,123,145,0.24);
-  --tech-wash: rgba(73,169,186,0.09);
-  --muted:  rgba(42,31,24,0.45);
-  --tape:   rgba(240,232,216,0.75);
+  --pink2:  #b84f81;
+  --tech:   #246b80;
+  --tech-bright: #35a4bd;
+  --tech-line: rgba(36,107,128,0.24);
+  --tech-wash: rgba(53,164,189,0.08);
+  --muted:  rgba(28,42,51,0.56);
+  --tape:   rgba(243,236,223,0.78);
 }
 
 html { scroll-behavior: smooth; }
 
 body {
   background-color: var(--cream);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.055'/%3E%3C/svg%3E");
+  background-image:
+    linear-gradient(rgba(36,107,128,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(36,107,128,.028) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.055'/%3E%3C/svg%3E");
+  background-size: 44px 44px, 44px 44px, 400px 400px;
   color: var(--ink);
   font-family: 'DM Sans', sans-serif;
   cursor: none;
@@ -103,18 +107,42 @@ body::after {
 @keyframes stickerPop { 0%{opacity:0;transform:translate(var(--sx,0),var(--sy,0)) scale(.96) rotate(var(--sr,0deg));} 68%{opacity:1;transform:translate(0,0) scale(1.02) rotate(var(--r,var(--sr,0deg)));} 100%{opacity:1;transform:translate(0,0) scale(1) rotate(var(--r,var(--sr,0deg)));} }
 @keyframes barPulse { from{height:3px;} to{height:12px;} }
 
-/* ── SUBTLE TECH ACCENTS ──
-   Cool blue-green details add a developer feel without losing the scrapbook warmth. */
-::selection { background: rgba(73,169,186,.22); color: var(--ink); }
+/* ── PROFESSIONAL TECH IDENTITY ── */
+::selection { background: rgba(53,164,189,.2); color: var(--ink); }
 a:focus-visible, button:focus-visible {
   outline: 2px solid var(--tech-bright);
   outline-offset: 4px;
 }
+.sec-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .14em;
+  padding: 6px 11px;
+  border-radius: 3px;
+  transform: none;
+  background: var(--tech);
+}
 .sec-tag::after {
-  content: " //";
-  color: rgba(255,255,255,.78);
+  content: "  //";
+  color: rgba(255,255,255,.7);
   font-family: 'DM Sans', sans-serif;
   font-weight: 700;
   letter-spacing: .04em;
 }
-
+.next-bar { border-top: 1px solid var(--tech-line); }
+.pill-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: .02em;
+  border-radius: 5px;
+}
+.pill-link:hover { color: var(--tech); border-color: var(--tech-line); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

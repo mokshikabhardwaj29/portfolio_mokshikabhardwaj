@@ -119,6 +119,88 @@
       .ach-item{grid-template-columns:36px 1fr;}.ach-badge{display:none;}
       .next-bar{padding:48px 28px;flex-direction:column;gap:16px;}
     }
+  
+    /* ── PROFESSIONAL TECH SYSTEM: WORK ── */
+    .work-hero {
+      background-image:
+        radial-gradient(ellipse at 83% 24%, rgba(53,164,189,.15), transparent 30%),
+        linear-gradient(rgba(36,107,128,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36,107,128,.045) 1px, transparent 1px);
+      background-size: auto, 42px 42px, 42px 42px;
+    }
+    .wh-eyebrow, .sk-icon, .club-role, .proj-num {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      color: var(--tech);
+      letter-spacing: .12em;
+    }
+    .wh-title em { color: var(--tech); }
+    .wh-sub { color: rgba(28,42,51,.72); }
+    .skills-section, .clubs-section {
+      background-image:
+        linear-gradient(rgba(36,107,128,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36,107,128,.022) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+    .sk-card, .club-card {
+      background: linear-gradient(145deg, #fff 0%, rgba(53,164,189,.045) 100%);
+      border: 1px solid var(--tech-line);
+      border-top: 3px solid var(--tech);
+      border-radius: 9px;
+      box-shadow: 0 8px 26px rgba(28,42,51,.055);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .sk-card:hover, .club-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px rgba(36,107,128,.12);
+      border-color: rgba(36,107,128,.35);
+    }
+    .sk-tape, .club-tape {
+      height: 4px;
+      border-radius: 4px;
+      top: 0;
+      background: var(--tech-bright) !important;
+      opacity: .5;
+    }
+    .sk-title, .club-name { color: var(--ink); }
+    .club-name em, .sk-title em { color: var(--tech); }
+    .sk-list li { color: rgba(28,42,51,.72); }
+    .sk-list li::before { content: "▹"; color: var(--tech); font-size: 14px; font-weight: 700; }
+    .ach-section {
+      background-image:
+        radial-gradient(ellipse at 90% 12%, rgba(53,164,189,.10), transparent 32%),
+        linear-gradient(rgba(36,107,128,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36,107,128,.022) 1px, transparent 1px);
+      background-size: auto, 44px 44px, 44px 44px;
+    }
+    .ach-item { border-bottom: 1px solid rgba(36,107,128,.16); }
+    .ach-n { color: var(--tech); }
+    .ach-name { color: rgba(28,42,51,.88); }
+    .ach-badge {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      background: var(--tech-wash);
+      border: 1px solid var(--tech-line);
+      color: var(--tech);
+      border-radius: 4px;
+      transform: none;
+    }
+    .proj-section {
+      background-image:
+        linear-gradient(rgba(36,107,128,.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36,107,128,.024) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+    .proj-name em { color: var(--tech); }
+    .proj-card::after { font-size: 18px; opacity: .8; }
+    @media (max-width: 860px) {
+      .work-hero { background-size: auto, 34px 34px, 34px 34px; }
+      .sk-card, .club-card { padding: 34px 26px; }
+      .ach-item { gap: 16px; }
+    }
+
   </style>
 </head>
 <body>

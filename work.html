@@ -11,7 +11,12 @@
     .work-hero {
       min-height: 100vh; display: flex; flex-direction: column;
       justify-content: flex-end; padding: 0 64px 80px;
-      position: relative; overflow: hidden; background: var(--cream2);
+      position: relative; overflow: hidden; background-color: var(--cream2);
+      background-image:
+        radial-gradient(circle at 82% 20%, rgba(73,169,186,.11), transparent 28%),
+        linear-gradient(rgba(40,123,145,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(40,123,145,.045) 1px, transparent 1px);
+      background-size: auto, 38px 38px, 38px 38px;
     }
     .hero-bg-name {
       position: absolute; bottom: -40px; right: -10px;
@@ -32,7 +37,7 @@
     .sk-card { background: #fff; padding: 44px 36px; position: relative; box-shadow: 3px 4px 16px rgba(42,31,24,.07); border: 1px solid rgba(42,31,24,.05); transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
     .sk-card:hover { transform: translateY(-7px) rotate(-1.5deg); box-shadow: 6px 12px 28px rgba(42,31,24,.14); }
     .sk-tape { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); width: 44px; height: 10px; border-radius: 1px; }
-    .sk-icon { font-family: 'Kalam', cursive; font-size: 12px; letter-spacing: .25em; text-transform: uppercase; color: var(--pink2); margin-bottom: 14px; }
+    .sk-icon { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--tech); margin-bottom: 14px; }
     .sk-title { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--ink); margin-bottom: 16px; }
     .sk-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
     .sk-list li { font-family: 'DM Sans', sans-serif; font-size: 15px; color: rgba(42,31,24,.55); display: flex; align-items: center; gap: 10px; }
@@ -61,17 +66,52 @@
     /* ── PROJECTS ── */
     .proj-section { padding: 0 64px 100px; background: var(--cream2); }
     .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .proj-card { background: #fff; padding: 52px 44px; position: relative; box-shadow: 3px 4px 16px rgba(42,31,24,.07); border: 1px solid rgba(42,31,24,.05); transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
-    .proj-card:hover { transform: translateY(-7px) rotate(-.5deg); box-shadow: 6px 12px 28px rgba(42,31,24,.14); }
-    .proj-tape { position: absolute; top: -8px; right: 32px; width: 44px; height: 10px; background: rgba(232,120,158,.38); border-radius: 1px; }
-    .proj-num { font-family: 'Kalam', cursive; font-size: 12px; letter-spacing: .25em; text-transform: uppercase; color: rgba(42,31,24,.25); margin-bottom: 20px; }
+    .proj-card {
+      background: #fff;
+      background-image: radial-gradient(circle at 94% 8%, rgba(73,169,186,.13), transparent 24%);
+      padding: 52px 44px; position: relative; isolation: isolate; overflow: hidden;
+      box-shadow: 3px 4px 16px rgba(42,31,24,.07);
+      border: 1px solid rgba(40,123,145,.15);
+      transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s, border-color .3s;
+    }
+    .proj-card::after {
+      content: "</>";
+      position: absolute; right: 18px; bottom: 13px;
+      font: 700 20px/1 'DM Sans', sans-serif; letter-spacing: -.08em;
+      color: rgba(40,123,145,.17); pointer-events: none; z-index: -1;
+      transition: color .25s, transform .25s;
+    }
+    .proj-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 6px 12px 28px rgba(40,123,145,.12);
+      border-color: rgba(40,123,145,.34);
+    }
+    .proj-card:hover::after { color: rgba(40,123,145,.30); transform: translate(-3px,-2px); }
+    .proj-tape { position: absolute; top: -8px; right: 32px; width: 44px; height: 10px; background: rgba(73,169,186,.42); border-radius: 1px; }
+    .proj-num {
+      display: inline-block; padding-bottom: 7px; margin-bottom: 20px;
+      border-bottom: 1px solid var(--tech-line);
+      font-family: 'DM Sans', sans-serif; font-size: 11px;
+      font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tech);
+    }
     .proj-name { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--ink); margin-bottom: 14px; line-height: 1; }
     .proj-name em { color: var(--pink); font-style: normal; }
-    .proj-desc { font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.8; color: rgba(42,31,24,.5); max-width: 360px; }
+    .proj-desc { font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.8; color: rgba(42,31,24,.62); max-width: 360px; }
     .proj-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
-    .proj-tag { font-family: 'Kalam', cursive; font-size: 12px; background: rgba(232,120,158,.12); border: 1px dashed rgba(232,120,158,.35); color: var(--pink2); padding: 3px 10px; transform: rotate(-1deg); display: inline-block; }
-    .proj-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; font-family: 'Kalam', cursive; font-size: 14px; color: var(--pink2); text-decoration: none; border-bottom: 1px solid rgba(196,91,138,.35); padding-bottom: 3px; transition: gap .2s, color .2s; }
-    .proj-link:hover { gap: 13px; color: var(--ink); }
+    .proj-tag {
+      font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600;
+      background: var(--tech-wash); border: 1px solid var(--tech-line);
+      color: var(--tech); padding: 4px 10px; border-radius: 3px;
+      display: inline-block; transform: none;
+    }
+    .proj-link {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 22px;
+      font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 13px;
+      color: var(--tech); text-decoration: none;
+      border-bottom: 1px solid var(--tech-line); padding-bottom: 3px;
+      transition: gap .2s, color .2s;
+    }
+    .proj-link:hover { gap: 13px; color: var(--pink2); }
 
     @media(max-width:860px){
       .work-hero,.skills-section,.clubs-section,.ach-section,.proj-section{padding-left:28px;padding-right:28px;}
@@ -190,14 +230,8 @@
       <div class="proj-tags"><span class="proj-tag">HTML</span><span class="proj-tag">CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">UI/UX</span></div>
       <a class="proj-link" href="https://github.com/mokshikabhardwaj29/Karwaan0129" target="_blank" rel="noopener noreferrer">Explore repository <span aria-hidden="true">↗</span></a>
     </article>
-    <article class="proj-card reveal rd3">
-      <div class="proj-tape" style="background:rgba(100,180,120,.4)"></div><div class="proj-num">[ project 04 · community ]</div>
-      <h3 class="proj-name"><em>AskUp</em></h3>
-      <p class="proj-desc">A skill-exchange web app concept that helps people share knowledge, discover skills, and learn through community-driven exchanges. The frontend prototype uses JavaScript and local storage for core interactions.</p>
-      <div class="proj-tags"><span class="proj-tag">JavaScript</span><span class="proj-tag">Web App</span><span class="proj-tag">Product Thinking</span></div>
-    </article>
     <article class="proj-card reveal">
-      <div class="proj-tape"></div><div class="proj-num">[ project 05 · rural access ]</div>
+      <div class="proj-tape"></div><div class="proj-num">[ project 04 · rural access ]</div>
       <h3 class="proj-name"><em>Kisan Suvidha</em></h3>
       <p class="proj-desc">An agricultural information platform concept designed to make farming knowledge, government schemes, and relevant resources easier to access for rural communities.</p>
       <div class="proj-tags"><span class="proj-tag">AgriTech</span><span class="proj-tag">Web Design</span><span class="proj-tag">Social Impact</span><span class="proj-tag">HTML/CSS</span></div>
